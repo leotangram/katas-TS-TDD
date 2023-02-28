@@ -10,6 +10,15 @@ function containsLowerCase(password: string): boolean {
 	return /.*[a-z].*/.test(password);
 }
 
+function containsUpperCase(password: string): boolean {
+	return /.*[A-Z].*/.test(password);
+}
+
 export function isStrongPassword(password: string): boolean {
-	return hasSixCharactersOrMore(password) && containNumber(password) && containsLowerCase(password);
+	return (
+		hasSixCharactersOrMore(password) &&
+		containNumber(password) &&
+		containsLowerCase(password) &&
+		containsUpperCase(password)
+	);
 }
