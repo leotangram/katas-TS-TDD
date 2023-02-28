@@ -18,4 +18,8 @@ describe('The password strength validator', () => {
 	test('should fails when the password is missing a number', () => {
 		expect(isStrongPassword('abcdABCD_')).toBe(false);
 	});
+
+	test('should fails when the password is missing a lowercase', () => {
+		expect(isStrongPassword('1234ABCD_')).toBe(false);
+	});
 });
