@@ -14,4 +14,8 @@ describe('The password strength validator', () => {
 	test('should fails when the password is too short', () => {
 		expect(isStrongPassword('1aA_')).toBe(false);
 	});
+
+	test('should fails when the password is missing a number', () => {
+		expect(isStrongPassword('abcdABCD_')).toBe(false);
+	});
 });
