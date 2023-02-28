@@ -19,6 +19,7 @@ export function isStrongPassword(password: string): boolean {
 		hasSixCharactersOrMore(password) &&
 		containNumber(password) &&
 		containsLowerCase(password) &&
-		containsUpperCase(password)
+		containsUpperCase(password) &&
+		password.includes('_')
 	);
 }
