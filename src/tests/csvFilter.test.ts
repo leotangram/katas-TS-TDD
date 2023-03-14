@@ -57,6 +57,15 @@ describe('CSV Filter', () => {
 		expect(result).toEqual([header]);
 	});
 
+	test('should allows only the correct lines when the igic tax is applied', () => {
+		const invoiceLine = fileWithOneInvoiceLineHaving('', '7', '930');
+		const csvFilter = CsvFilter.create([header, invoiceLine]);
+
+		const result = csvFilter.filteredLines;
+
+		expect(result).toEqual([header, invoiceLine]);
+	});
+
 	function fileWithOneInvoiceLineHaving(ivaTax = '21', igicTax = emptyField, netAmount = '790') {
 		const invoiced = '1';
 		const invoicedDate = '02/05/2021';
