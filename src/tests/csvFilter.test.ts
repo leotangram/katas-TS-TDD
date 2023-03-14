@@ -12,6 +12,15 @@ describe('CSV Filter', () => {
 		expect(result).toEqual([header, invoiceLine]);
 	});
 
+	test('should allows only the correct lines when the igic tax is applied', () => {
+		const invoiceLine = fileWithOneInvoiceLineHaving('', '7', '930');
+		const csvFilter = CsvFilter.create([header, invoiceLine]);
+
+		const result = csvFilter.filteredLines;
+
+		expect(result).toEqual([header, invoiceLine]);
+	});
+
 	test('should exclude lines with both tax fields populated as they are exclusive', () => {
 		const invoiceLine = fileWithOneInvoiceLineHaving('21', '7');
 		const csvFilter = CsvFilter.create([header, invoiceLine]);
@@ -55,15 +64,6 @@ describe('CSV Filter', () => {
 		const result = csvFilter.filteredLines;
 
 		expect(result).toEqual([header]);
-	});
-
-	test('should allows only the correct lines when the igic tax is applied', () => {
-		const invoiceLine = fileWithOneInvoiceLineHaving('', '7', '930');
-		const csvFilter = CsvFilter.create([header, invoiceLine]);
-
-		const result = csvFilter.filteredLines;
-
-		expect(result).toEqual([header, invoiceLine]);
 	});
 
 	function fileWithOneInvoiceLineHaving(ivaTax = '21', igicTax = emptyField, netAmount = '790') {
