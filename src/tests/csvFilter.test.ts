@@ -48,11 +48,19 @@ describe('CSV Filter', () => {
 		expect(result).toEqual([header]);
 	});
 
-	function fileWithOneInvoiceLineHaving(ivaTax = '21', igicTax = emptyField) {
+	test('should excludes lines with miscalculated net amount for iva tax', () => {
+		const invoiceLine = fileWithOneInvoiceLineHaving('21', '', '900');
+		const csvFilter = CsvFilter.create([header, invoiceLine]);
+
+		const result = csvFilter.filteredLines;
+
+		expect(result).toEqual([header]);
+	});
+
+	function fileWithOneInvoiceLineHaving(ivaTax = '21', igicTax = emptyField, netAmount = '790') {
 		const invoiced = '1';
 		const invoicedDate = '02/05/2021';
 		const grossAmount = '1000';
-		const netAmount = '790';
 		const concept = 'ACER Laptop';
 		const cif = 'B76430134';
 		const nif = emptyField;
