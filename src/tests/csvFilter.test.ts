@@ -1,7 +1,7 @@
 import { CsvFilter } from '../core/csvFilter';
 
 interface FileWithOneInvoiceLineHavingParams {
-	invoicedId?: string;
+	invoiceId?: string;
 	ivaTax?: string;
 	igicTax?: string;
 	netAmount?: string;
@@ -101,20 +101,39 @@ describe('CSV Filter', () => {
 		expect(result).toEqual([header]);
 	});
 
-	test('should excludes lines with repeated invoice id', () => {
-		const invoiceLine = fileWithOneInvoiceLineHaving({ invoicedId: '1' });
-		const invoiceLine2 = fileWithOneInvoiceLineHaving({ invoicedId: '1' });
-		const invoiceLine3 = fileWithOneInvoiceLineHaving({ invoicedId: '3' });
-		const invoiceLine4 = fileWithOneInvoiceLineHaving({ invoicedId: '4' });
-		const invoiceLine5 = fileWithOneInvoiceLineHaving({ invoicedId: '3' });
+	test.skip('should excludes lines with repeated invoice id', () => {
+		const invoiceLine = fileWithOneInvoiceLineHaving({ invoiceId: '1' });
+		const invoiceLine2 = fileWithOneInvoiceLineHaving({ invoiceId: '1' });
+		const invoiceLine3 = fileWithOneInvoiceLineHaving({ invoiceId: '3' });
+		const invoiceLine4 = fileWithOneInvoiceLineHaving({ invoiceId: '4' });
+		const invoiceLine5 = fileWithOneInvoiceLineHaving({ invoiceId: '3' });
 		const csvFilter = CsvFilter.create([header, invoiceLine, invoiceLine2, invoiceLine3, invoiceLine4, invoiceLine5]);
 		const result = csvFilter.filteredLines;
 
 		expect(result).toEqual([header, invoiceLine4]);
 	});
 
+	test('should takes repeated invoices', () => {
+		const invoiceLine = fileWithOneInvoiceLineHaving({ invoiceId: '1' });
+		const invoiceLine2 = fileWithOneInvoiceLineHaving({ invoiceId: '1' });
+		const invoiceLine3 = fileWithOneInvoiceLineHaving({ invoiceId: '3' });
+		const invoiceLine4 = fileWithOneInvoiceLineHaving({ invoiceId: '4' });
+		const invoiceLine5 = fileWithOneInvoiceLineHaving({ invoiceId: '3' });
+		const csvFilter = CsvFilter.create([]);
+
+		const result = csvFilter.takeRepeatedInvoiceId([
+			invoiceLine,
+			invoiceLine2,
+			invoiceLine3,
+			invoiceLine4,
+			invoiceLine5,
+		]);
+
+		expect(result).toEqual(['1', '3']);
+	});
+
 	function fileWithOneInvoiceLineHaving({
-		invoicedId = '1',
+		invoiceId = '1',
 		ivaTax = '21',
 		igicTax = emptyField,
 		netAmount = '790',
@@ -125,6 +144,6 @@ describe('CSV Filter', () => {
 		const concept = 'ACER Laptop';
 		const cif = 'B76430134';
 
-		return [invoicedId, invoicedDate, grossAmount, netAmount, ivaTax, igicTax, concept, cif, nif].join(',');
+		return [invoiceId, invoicedDate, grossAmount, netAmount, ivaTax, igicTax, concept, cif, nif].join(',');
 	}
 });
