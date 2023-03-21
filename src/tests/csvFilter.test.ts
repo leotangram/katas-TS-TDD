@@ -12,7 +12,7 @@ describe('CSV Filter', () => {
 	const emptyField = '';
 
 	test('should allows for correct lines only', () => {
-		const invoiceLine = fileWithOneInvoiceLineHaving();
+		const invoiceLine = fileWithOneInvoiceLineHaving({});
 		const csvFilter = CsvFilter.create([header, invoiceLine]);
 		const result = csvFilter.filteredLines;
 
@@ -26,6 +26,15 @@ describe('CSV Filter', () => {
 		const result = csvFilter.filteredLines;
 
 		expect(result).toEqual([header, invoiceLine]);
+	});
+
+	test('should allows only multiple correct lines', () => {
+		const invoiceLine = fileWithOneInvoiceLineHaving({});
+		const invoiceLine2 = fileWithOneInvoiceLineHaving({});
+		const csvFilter = CsvFilter.create([header, invoiceLine, invoiceLine2]);
+		const result = csvFilter.filteredLines;
+
+		expect(result).toEqual([header, invoiceLine, invoiceLine2]);
 	});
 
 	test('should exclude lines with both tax fields populated as they are exclusive', () => {
@@ -96,7 +105,7 @@ describe('CSV Filter', () => {
 		igicTax = emptyField,
 		netAmount = '790',
 		nif = emptyField,
-	}: FileWithOneInvoiceLineHavingParams = {}) {
+	}: FileWithOneInvoiceLineHavingParams) {
 		const invoiced = '1';
 		const invoicedDate = '02/05/2021';
 		const grossAmount = '1000';
