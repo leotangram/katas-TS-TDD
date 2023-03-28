@@ -113,6 +113,13 @@ describe('CSV Filter', () => {
 		expect(result).toEqual([header, invoiceLine4]);
 	});
 
+	test('should an empty list will produce an output empty list', () => {
+		const csvFilter = CsvFilter.create([]);
+		const result = csvFilter.filteredLines;
+
+		expect(result).toEqual([]);
+	});
+
 	function fileWithOneInvoiceLineHaving({
 		invoiceId = '1',
 		ivaTax = '21',
