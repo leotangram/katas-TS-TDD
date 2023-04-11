@@ -1,8 +1,10 @@
 export const getPrimeFactorsFor = (number) => {
-	const factors = [2];
+	const factor = 2;
+	const factors = [factor];
+	const remainder = number / factor;
 
-	if (number / 2 > 1) {
-		factors.push(2);
+	if (remainder > 1) {
+		return factors.concat(factor);
 	}
 
 	return factors;
