@@ -1,5 +1,10 @@
 export const getPrimeFactorsFor = (number) => {
-	const factor = 2;
+	let factor = 2;
+
+	if (number % factor !== 0) {
+		factor = 3;
+	}
+
 	const factors = [factor];
 	const remainder = number / factor;
 
