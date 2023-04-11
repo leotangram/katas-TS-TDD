@@ -1,8 +1,8 @@
 export const getPrimeFactorsFor = (number) => {
 	let factor = 2;
 
-	if (number % factor !== 0) {
-		factor = 3;
+	while (number % factor !== 0) {
+		++factor;
 	}
 
 	const factors = [factor];
