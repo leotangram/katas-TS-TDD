@@ -18,5 +18,6 @@ describe('The prime factors', () => {
 		expect(getPrimeFactorsFor(3)).toEqual([3]);
 		expect(getPrimeFactorsFor(3 * 3)).toEqual([3, 3]);
 		expect(getPrimeFactorsFor(2 * 3)).toEqual([2, 3]);
+		expect(getPrimeFactorsFor(5 * 5)).toEqual([5, 5]);
 	});
 });
