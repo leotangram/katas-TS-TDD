@@ -1,3 +1,4 @@
 export const getPrimeFactorsFor = (number) => {
-	return [2];
+	const factors = [2];
+	return factors;
 };
