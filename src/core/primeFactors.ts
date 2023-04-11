@@ -11,6 +11,8 @@ const findSmallestPrime = (number: number) => {
 };
 
 export const getPrimeFactorsFor = (number: number) => {
+	if (number < 1) throw new Error('Only positive numbers are allowed');
+
 	const prime = findSmallestPrime(number);
 	const remainder = number / prime;
 
