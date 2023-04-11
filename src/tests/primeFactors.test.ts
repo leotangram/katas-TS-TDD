@@ -12,6 +12,8 @@ import { getPrimeFactorsFor } from '../core/primeFactors';
 
 describe('The prime factors', () => {
 	test('should finds the prime composition of the given number', () => {
+		expect(getPrimeFactorsFor(2)).toEqual([2]);
 		expect(getPrimeFactorsFor(2 * 2)).toEqual([2, 2]);
+		expect(getPrimeFactorsFor(2 * 2 * 2)).toEqual([2, 2, 2]);
 	});
 });
