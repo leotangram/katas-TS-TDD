@@ -1,15 +1,16 @@
-export const getPrimeFactorsFor = (number) => {
+const findSmallestPrime = (number: number) => {
 	let factor = 2;
 
 	while (number % factor !== 0) {
 		++factor;
 	}
 
-	const remainder = number / factor;
+	return factor;
+};
 
-	if (remainder <= 1) {
-		return [factor];
-	}
+export const getPrimeFactorsFor = (number: number) => {
+	const prime = findSmallestPrime(number);
+	const remainder = number / prime;
 
-	return [factor].concat(getPrimeFactorsFor(remainder));
+	return remainder <= 1 ? [prime] : [prime].concat(getPrimeFactorsFor(remainder));
 };
