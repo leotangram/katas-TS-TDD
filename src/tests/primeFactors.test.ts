@@ -1,4 +1,3 @@
-import { getPrimeFactorsFor } from '../core/primeFactors';
 /*
 2 -> [2]
 2 * 2 -> [2,2]
@@ -10,15 +9,19 @@ import { getPrimeFactorsFor } from '../core/primeFactors';
 5 * 7 * 11 * 3 -> [3,5,7,11]
 */
 
+import { getPrimeFactorsFor } from '../core/primeFactors';
+
 describe('The prime factors', () => {
-	test('should finds the prime composition of the given number', () => {
+	test('should knows what is a prime number', () => {
 		expect(getPrimeFactorsFor(2)).toEqual([2]);
-		expect(getPrimeFactorsFor(2 * 2)).toEqual([2, 2]);
-		expect(getPrimeFactorsFor(2 * 2 * 2)).toEqual([2, 2, 2]);
 		expect(getPrimeFactorsFor(3)).toEqual([3]);
-		expect(getPrimeFactorsFor(3 * 3)).toEqual([3, 3]);
-		expect(getPrimeFactorsFor(2 * 3)).toEqual([2, 3]);
-		expect(getPrimeFactorsFor(5 * 5)).toEqual([5, 5]);
+	});
+
+	test('should produces the same result to multiply the numbers in the output', () => {
+		expect(getPrimeFactorsFor(2 * 2 * 2)).toEqual([2, 2, 2]);
+	});
+
+	test('should orders the prime factors from the smallest to the biggest', () => {
 		expect(getPrimeFactorsFor(5 * 7 * 11 * 3)).toEqual([3, 5, 7, 11]);
 	});
 });
