@@ -1,4 +1,12 @@
-export function wordWrap(text: string, columnWidth: number): string {
+export function wordWrap(text: string | null | undefined, columnWidth: number): string {
+	if (columnWidth < 0) {
+		throw new Error('Negative column width is not allowed');
+	}
+
+	if (!text) {
+		return '';
+	}
+
 	if (text.length <= columnWidth) return text;
 
 	const wrapIndex = getWrapIndex(text, columnWidth);

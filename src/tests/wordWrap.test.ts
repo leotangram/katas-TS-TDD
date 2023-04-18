@@ -8,5 +8,8 @@ describe('The Word Wrap', () => {
 		expect(wordWrap('reallylongword', 4)).toBe('real\nlylo\nngwo\nrd');
 		expect(wordWrap('abc def ghi', 4)).toBe('abc\ndef\nghi');
 		expect(wordWrap(' abcd', 4)).toBe('\nabcd');
+		expect(wordWrap(null, 5)).toBe('');
+		expect(wordWrap(undefined, 5)).toBe('');
+		expect(() => wordWrap('hello', -5)).toThrow('Negative column width is not allowed');
 	});
 });
