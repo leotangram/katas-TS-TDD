@@ -6,6 +6,7 @@ describe('The Word Wrap', () => {
 		expect(wordWrap('longword', 4)).toBe('long\nword');
 		expect(wordWrap('longword', 3)).toBe('lon\ngwo\nrd');
 		expect(wordWrap('reallylongword', 4)).toBe('real\nlylo\nngwo\nrd');
-		expect(wordWrap('abc def', 4)).toBe('abc\ndef');
+		expect(wordWrap('abc def ghi', 4)).toBe('abc\ndef\nghi');
+		expect(wordWrap(' abcd', 4)).toBe('\nabcd');
 	});
 });
